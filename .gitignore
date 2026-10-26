@@ -1,0 +1,115 @@
+# ==========================================================
+#  NeutronScalper — .gitignore
+# ==========================================================
+
+# -------- Secrets & credentials --------
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.pfx
+secrets/
+credentials/
+api_keys.*
+config/live.yaml
+config/*.private.yaml
+
+# -------- Runtime artifacts --------
+logs/
+*.log
+*.tmp
+*.temp
+*.cache
+cache/
+sessions/
+state/
+*.session
+*.lock
+
+# -------- OS junk --------
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# -------- IDE / editors --------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-workspace
+*.sublime-project
+
+# -------- Python (tooling / scripts) --------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# -------- Node (docs tooling) --------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+dist/
+build/
+.next/
+out/
+
+# -------- Java / Kotlin --------
+*.class
+*.jar
+.gradle/
+target/
+
+# -------- Go --------
+*.exe~
+*.test
+*.out
+
+# -------- C/C++ --------
+*.o
+*.obj
+*.so
+*.dll
+*.dylib
+*.pdb
+*.ilk
+
+# -------- Archives (block by default) --------
+*.zip
+*.7z
+*.rar
+*.tar
+*.tar.gz
+*.tgz
+*.gz
+*.bz2
+*.xz
+
+# -------- EXCEPTIONS: keep the published build --------
+!downloads/
+!downloads/*.zip
+!downloads/*.7z
+
+# -------- Temporary / scratch --------
+scratch/
+playground/
+todo.txt
+*.bak
+*.orig
+*.rej
